@@ -1,0 +1,31 @@
+from tkinter import *
+from pytube import YouTube
+
+xman = Tk()
+xman.geometry("500x300")
+xman.resizable(0,0)
+xman.title('hndsa')
+Label(xman, text='hndsa for tech',font='arial 15 bold').pack()
+link = StringVar()
+Label(xman,text='past your link',font='arial 15 bold').place(x =160,y = 60)
+link_entry = Entry(xman,width=70,textvariable=link).place(x = 32,y = 90)
+def high():
+    url = YouTube(str(link.get()))
+    video = url.streams.get_highest_resolution()
+    video.download()
+    Label(xman,text='DOWNLOADED!', font='arial 15 bold').place(x = 180,y = 210)
+Button(xman,text='High res.',font='arial 15 bold',bg='green',padx=2, command=high).place(x =80,y=50)
+
+def audio():
+    url = YouTube(str(link.get()))
+    video = url.streams.get_audio_only()
+    video.download()
+    Label(xman,text='DOWNLOADED!', font='arial 15 bold').place(x = 80,y = 210)
+Button(xman,text='audio.',font='arial 15 bold',bg='violet',padx=2, command=audio).place(x =80,y=90)
+
+def low():
+    url = YouTube(str(link.get()))
+    video = url.streams.get_lowest_resolution()
+    video.download()
+    Label(xman,text='DOWNLOADED!', font='arial 15 bold').place(x = 180,y = 210)
+Button(xman,text='LOW res.',font='arial 15 bold',bg='white',padx=2, command=low).place(x =180,y=250)
